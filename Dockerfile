@@ -8,12 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL -o /tmp/ssp.tar.gz \
-      https://github.com/simplesamlphp/simplesamlphp/releases/download/v${SSP_VERSION}/simplesamlphp-${SSP_VERSION}-full.tar.gz \
-    && mkdir /var/simplesamlphp \
-    && tar -xzf /tmp/ssp.tar.gz --strip-components=1 -C /var/simplesamlphp \
-    && rm /tmp/ssp.tar.gz \
-    && chown -R www-data:www-data /var/simplesamlphp/log /var/simplesamlphp/data
+RUN set -eux; \
+    curl -fsSL -o /tmp/ssp.tar.gz \
+      "https://github.com/simplesamlphp/simplesamlphp/releases/download/v${SSP_VERSION}/simplesamlphp-${SSP_VERSION}-full.tar.gz"; \
+    mkdir -p /var/simplesamlphp; \
+    tar -xzf /tmp/ssp.tar.gz --strip-components=1 -C /var/simplesamlphp; \
+    rm /tmp/ssp.tar.gz; \
+    mkdir -p /var/simplesamlphp/log /var/simplesamlphp/data; \
+    chown -R www-data:www-data /var/simplesamlphp/log /var/simplesamlphp/data
 
 RUN printf '%s\n' \
   'Alias /simplesaml /var/simplesamlphp/public' \
