@@ -1,0 +1,15 @@
+services:
+  simplesaml:
+    image: ghcr.io/yumuljm/simplesamlphp:${SSP_VERSION}
+    container_name: simplesaml
+    restart: unless-stopped
+    volumes:
+      - ./simplesamlphp/config:/var/simplesamlphp/config
+      - ./simplesamlphp/metadata:/var/simplesamlphp/metadata
+      - ./simplesamlphp/cert:/var/simplesamlphp/cert
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
