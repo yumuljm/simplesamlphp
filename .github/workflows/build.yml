@@ -3,6 +3,10 @@ name: build-image
 on:
   push:
     branches: [main]
+    paths:
+      - Dockerfile
+      - .env
+      - .github/workflows/build.yml
   workflow_dispatch:
   schedule:
     - cron: "0 5 * * 1"
