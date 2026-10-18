@@ -14,8 +14,8 @@ RUN set -eux; \
     mkdir -p /var/simplesamlphp; \
     tar -xzf /tmp/ssp.tar.gz --strip-components=1 -C /var/simplesamlphp; \
     rm /tmp/ssp.tar.gz; \
-    mkdir -p /var/simplesamlphp/log /var/simplesamlphp/data; \
-    chown -R www-data:www-data /var/simplesamlphp/log /var/simplesamlphp/data
+    mkdir -p /var/simplesamlphp/log /var/simplesamlphp/data /var/cache/simplesamlphp; \
+    chown -R www-data:www-data /var/simplesamlphp/log /var/simplesamlphp/data /var/cache/simplesamlphp
 
 RUN printf '%s\n' \
   'Alias /simplesaml /var/simplesamlphp/public' \
