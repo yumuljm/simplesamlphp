@@ -7,6 +7,10 @@ services:
       - ./simplesamlphp/config:/var/simplesamlphp/config
       - ./simplesamlphp/metadata:/var/simplesamlphp/metadata
       - ./simplesamlphp/cert:/var/simplesamlphp/cert
+      - ./simplesamlphp/apache-https.conf:/etc/apache2/conf-enabled/https-proxy.conf:ro
+      - ./simplesamlphp/www:/var/www/html
+      - ./simplesamlphp/fix-port.php:/var/www/fix-port.php:ro
+      - ./simplesamlphp/fix-port.ini:/usr/local/etc/php/conf.d/zz-fix-port.ini:ro
     networks:
       - proxy
 
