@@ -1,10 +1,10 @@
-FROM php:8.3-apache
+FROM php:8.5-apache
 
 ARG SSP_VERSION
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       libicu-dev curl ca-certificates \
-    && docker-php-ext-install intl opcache \
+    && docker-php-ext-install intl \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
