@@ -14,6 +14,9 @@ RUN set -eux; \
     mkdir -p /var/simplesamlphp; \
     tar -xzf /tmp/ssp.tar.gz --strip-components=1 -C /var/simplesamlphp; \
     rm /tmp/ssp.tar.gz; \
+    F=/var/simplesamlphp/vendor/simplesamlphp/saml2-legacy/src/SAML2/Compat/Ssp/Container.php; \
+    grep -q getInflateSizeLimit "$F" || sed -i '$ s/^}$/\n    public function getInflateSizeLimit(): int\n    {\n        return 8 * 1024 * 1024;\n    }\n}/' "$F"; \
+    php -l "$F"; \
     mkdir -p /var/simplesamlphp/log /var/simplesamlphp/data /var/cache/simplesamlphp; \
     chown -R www-data:www-data /var/simplesamlphp/log /var/simplesamlphp/data /var/cache/simplesamlphp
 
